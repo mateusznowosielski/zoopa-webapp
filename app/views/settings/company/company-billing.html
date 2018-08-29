@@ -1,0 +1,114 @@
+    
+<div class="container container-company">
+
+	<div class="col-md-12">
+		
+		<div ng-repeat="account in accounts">
+
+			<div class="form-group form-inline" ng-show="!editedAccount || account.id != editedAccount.id">
+				<div class="form-group col-md-3 col-sm-4 col-xs-12 readonly">
+					<label>Name</label>
+					<input type="text" class="form-control" ng-model="account.label" readonly>
+				</div>
+				<!-- <div class="form-group col-md-2 col-sm-4 col-xs-12 readonly">
+					<label>Tax ID</label>
+					<input type="text" class="form-control" ng-model="account.tax_id" readonly>
+				</div> -->
+				<div class="form-group col-md-3 col-sm-4 col-xs-12 readonly">
+					<label>Account number</label>
+					<input type="text" class="form-control" ng-model="account.bank_account_number" readonly>
+				</div>
+				<div class="form-group col-md-3 col-sm-4 col-xs-12 readonly">
+					<label>Routing number</label>
+					<input type="text" class="form-control" ng-model="account.bank_routing_number" readonly>
+				</div>
+                <div class="form-group col-md-1 col-sm-4 col-xs-4" style="height: 62px;">
+                    <label>Default</label>
+                    <div class="clearfix"></div>
+                    <label style="margin-top: 5px;"><input type="checkbox" ng-model="account.is_default" ng-click="makeDefaultAccount($event, account.id, account.is_default)"></label>
+                </div>
+				<div class="form-group col-md-1 col-sm-4 col-xs-4 readonly" style="height: 62px;">
+					<button class="btn btn-default btn-full" ng-click="editAccount(account.id)"><span class="glyphicon glyphicon-edit"></span></button>
+				</div>
+				<div class="form-group col-md-1 col-sm-4 col-xs-4 readonly" style="height: 62px;">
+					<button class="btn btn-default btn-full" ng-click="deleteAccount(account.id)"><span class="glyphicon glyphicon-trash"></span></button>
+				</div>
+			</div>
+
+			<form ng-show="editedAccount && account.id == editedAccount.id" class="form-group form-inline" role="form" name="editedAccountForm">
+				<div focus-input class="form-group col-md-3 col-sm-4 col-xs-12">
+					<label>Name</label>
+					<small class="color-error" ng-show="isEditedInvalid('editedAccountName', 'required')">is required</small>
+                	<small class="color-error" ng-show="isEditedInvalid('editedAccountName', 'maxlength')">is max 50 characters</small>
+					<input type="text" class="form-control" name="editedAccountName" ng-model="editedAccount.label" required="" maxlength="50">
+				</div>
+				<!-- <div focus-input class="form-group col-md-2 col-sm-4 col-xs-12">
+					<label>Tax ID</label>
+					<small class="color-error" ng-show="isEditedInvalid('editedAccountTaxId', 'required')">is required</small>
+                	<small class="color-error" ng-show="isEditedInvalid('editedAccountTaxId', 'maxlength')">is max 50 characters</small>
+					<input type="text" class="form-control" name="editedAccountTaxId" ng-model="editedAccount.tax_id" required="" maxlength="50">
+				</div> -->
+				<div class="form-group col-md-3 col-sm-4 col-xs-12 readonly">
+					<label>Account number</label>
+					<input type="text" class="form-control" ng-model="editedAccount.bank_account_number" readonly>
+				</div>
+				<div class="form-group col-md-3 col-sm-4 col-xs-12 readonly">
+					<label>Routing number</label>
+					<input type="text" class="form-control" ng-model="editedAccount.bank_routing_number" readonly>
+				</div>
+                <div class="form-group col-md-1 col-sm-4 col-xs-4" style="height: 62px;">
+                    <label>Default</label>
+                    <div class="clearfix"></div>
+                    <label style="margin-top: 5px;"><input type="checkbox" ng-model="editedAccount.is_default" ng-click="makeDefaultAccount($event, editedAccount.id, editedAccount.is_default)" disabled></label>
+                </div>
+				<div class="form-group col-md-1 col-sm-4 col-xs-4 readonly" style="height: 62px;">
+					<button class="btn btn-default btn-full" ng-click="saveAccount(editedAccount.id, editedAccount)"><span class="glyphicon glyphicon-floppy-saved"></span></button>
+				</div>
+				<div class="form-group col-md-1 col-sm-4 col-xs-4 readonly" style="height: 62px;">
+					<button class="btn btn-default btn-full" ng-click="cancelEditingAccount(editedAccount.id)"><span class="glyphicon glyphicon-remove"></span></button>
+				</div>
+			</form>
+
+			<div class="horizontal-separator visible-sm-block visible-xs-block"></div>
+			
+		</div>
+
+		<form class="form-group form-inline" role="form" name="newAccountForm">
+
+			<div focus-input class="form-group col-md-3 col-sm-4 col-xs-12">
+				<label>Name</label>
+				<small class="color-error" ng-show="isNewInvalid('newAccountName', 'required')">is required</small>
+                <small class="color-error" ng-show="isNewInvalid('newAccountName', 'maxlength')">is max 50 characters</small>
+				<input type="text" class="form-control" name="newAccountName" ng-model="newAccount.label" required="" maxlength="50">
+			</div>
+			<!-- <div focus-input class="form-group col-md-2 col-sm-4 col-xs-12">
+				<label>Tax ID</label>
+				<small class="color-error" ng-show="isNewInvalid('newAccountTaxId', 'required')">is required</small>
+                <small class="color-error" ng-show="isNewInvalid('newAccountTaxId', 'maxlength')">is max 50 characters</small>
+				<input type="text" class="form-control" name="newAccountTaxId" ng-model="newAccount.tax_id" required="" maxlength="50">
+			</div> -->
+			<div focus-input class="form-group col-md-3 col-sm-4 col-xs-12">
+				<label>Account number</label>
+				<small class="color-error" ng-show="isNewInvalid('newAccountNumber', 'required')">is required</small>
+                <small class="color-error" ng-show="isNewInvalid('newAccountNumber', 'maxlength')">is max 25 characters</small>
+				<input type="text" class="form-control" name="newAccountNumber" ng-model="newAccount.bank_account_number" required="" maxlength="25">
+			</div>
+			<div focus-input class="form-group col-md-3 col-sm-4 col-xs-12">
+				<label>Routing number</label>
+				<small class="color-error" ng-show="isNewInvalid('newAccountRounting', 'required')">is required</small>
+                <small class="color-error" ng-show="isNewInvalid('newAccountRounting', 'routingNumber')">format is incorrect</small>
+				<input type="text" class="form-control" name="newAccountRounting" ng-model="newAccount.bank_routing_number" required="" routing-number>
+			</div>
+            <!-- <div class="form-group col-md-1 col-sm-4 col-xs-4" style="height: 62px;">
+                <label>Default</label>
+                <div class="clearfix"></div>
+                <label style="margin-top: 5px;"><input type="checkbox" ng-model="newAccount.is_default"></label>
+            </div> -->
+			<div class="form-group col-md-3 col-sm-12 col-xs-12" style="height: 62px;">
+				<button type="submit" class="btn btn-default btn-full" ng-click="createAccount(newAccount)"><span class="glyphicon glyphicon-plus"></span></button>
+			</div>
+		</form>
+
+	</div>
+
+</div>

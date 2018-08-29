@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default navbar-sub-company" role="navigation">
+
+  <div class="container-fluid text-center">
+      <ul class="nav navbar-nav">
+        <li ng-class="{ active: state.includes('main.settings.company.account') }">
+        	<a ui-sref="main.settings.company.account">
+            <span class="glyphicon status-icon" ng-class="companyAccountFilled ? 'glyphicon-ok-circle text-valid': 'glyphicon-exclamation-sign text-invalid'"></span> <span ng-class="companyAccountFilled ? 'text-valid': 'text-invalid'">Company Account</span></a>
+        </li>
+        <li ng-class="{ active: state.includes('main.settings.company.data') }">
+        	<a ui-sref="main.settings.company.data"><span class="glyphicon status-icon" ng-class="companyDataFilled ? 'glyphicon-ok-circle text-valid': 'glyphicon-exclamation-sign text-invalid'"></span> <span ng-class="companyDataFilled ? 'text-valid': 'text-invalid'">Company Data</span></a>
+        </li>
+        <li ng-class="{ active: state.includes('main.settings.company.hours') }">
+        	<a ui-sref="main.settings.company.hours"><span class="glyphicon status-icon" ng-class="openingHoursFilled ? 'glyphicon-ok-circle text-valid': 'glyphicon-exclamation-sign text-invalid'"></span> <span ng-class="openingHoursFilled ? 'text-valid': 'text-invalid'">Opening Hours</span></a>
+        </li>
+        <li ng-class="{ active: state.includes('main.settings.company.billing') }">
+        	<a ui-sref="main.settings.company.billing"><span class="glyphicon status-icon" ng-class="billingDataFilled ? 'glyphicon-ok-circle text-valid': 'glyphicon-exclamation-sign text-invalid'"></span> <span ng-class="billingDataFilled ? 'text-valid': 'text-invalid'">Billing Data</span></a>
+        </li>
+      </ul>
+  </div>
+
+</nav>
+
+<div ui-view="content"></div>

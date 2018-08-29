@@ -1,0 +1,193 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <!-- <meta name="viewport" content="width=device-width"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel='stylesheet' href='bower_components/angular-ui-grid/ui-grid.css' />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:500,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div class="main-container" ui-view="content"></div>
+
+    <footer>
+      <ul class="list-unstyled">
+        <li class="pull-left">© Zoopa Inc. 2015</li>
+        <li class="pull-right"><a ng-click="openTermsConditions()">Terms of Service</a></li>
+        <li class="pull-right"><a ng-click="openPrivacyPolicy()">Privacy Policy</a></li>
+      </ul>
+    </footer>
+
+    <div class="modal-notifications" ng-controller="NotificationsCtrl">
+        <div ng-include src="'views/notifications.html'" ng-if="visible"></div>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!-- <script>
+       // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       // ga('create', 'UA-XXXXX-X');
+       // ga('send', 'pageview');
+    </script>-->
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild *.local, 169.254/16 -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+    <script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
+    <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/exif-js/exif.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="bower_components/jquery.autoellipsis/src/jquery.autoellipsis.js"></script>
+    <script src="bower_components/angular-fcsa-number/src/fcsaNumber.js"></script>
+    <script src="bower_components/angular-elastic/elastic.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <script>
+
+        (function() {
+
+            var businessWebApp = angular
+              .module('businessWebApp', [
+                'ui.router',
+                'ui.bootstrap',
+                'dropdown-multiselect',
+                'ngAnimate',
+                'ngCookies',
+                'ngResource',
+                'ngRoute',
+                'ngSanitize',
+                'ngTouch',
+                'angularFileUpload',
+                'ng-thumb',
+                'angularSpinner',
+                'LocalStorageModule',
+                'ui.grid',
+                'ui.grid.selection',
+                'ellipsis',
+                'fcsa-number',
+                'monospaced.elastic'
+              ])
+
+            fetchData().then(bootstrapApplication);
+
+            function fetchData() {
+                var initInjector = angular.injector(["ng"]);
+                var $http = initInjector.get("$http");
+
+                return $http.get("config.json").then(function(response) {
+                    businessWebApp.constant("config", response.data);
+                }, function(error) {
+                });
+            }
+
+            function bootstrapApplication() {
+                angular.element(document).ready(function() {
+                    angular.bootstrap(document, ["businessWebApp"]);
+                });
+            }
+
+        }());
+
+    </script>
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/dashboard.js"></script>
+    <script src="scripts/controllers/settings.js"></script>
+    <script src="scripts/controllers/notifications.js"></script>
+    <script src="scripts/controllers/settings/company.js"></script>
+    <script src="scripts/controllers/settings/company/company-account.js"></script>
+    <script src="scripts/controllers/settings/company/company-data.js"></script>
+    <script src="scripts/controllers/settings/company/company-hours.js"></script>
+    <script src="scripts/controllers/settings/company/company-billing.js"></script>
+    <script src="scripts/controllers/settings/payouts.js"></script>
+    <script src="scripts/controllers/settings/devices.js"></script>
+    <script src="scripts/controllers/settings/reports.js"></script>
+    <script src="scripts/controllers/account/account-creation.js"></script>
+    <script src="scripts/controllers/account/company-creation.js"></script>
+    <script src="scripts/controllers/account/terms-conditions.js"></script>
+    <script src="scripts/controllers/account/privacy-policy.js"></script>
+    <script src="scripts/controllers/account/forgot-password.js"></script>
+
+    <script src="scripts/directives/dropdown-multiselect.js"></script>
+    <script src="scripts/directives/ng-thumb.js"></script>
+    <script src="scripts/directives/register-validator.js"></script>
+    <script src="scripts/directives/compare-to.js"></script>
+    <script src="scripts/directives/ng-print.js"></script>
+    <script src="scripts/directives/focus-input.js"></script>
+    <script src="scripts/directives/ellipsis.js"></script>
+    <script src="scripts/directives/ng-integer.js"></script>
+    <script src="scripts/directives/ng-min-max.js"></script>
+    <script src="scripts/directives/routing-number-validator.js"></script>
+
+    <script src="scripts/services/app-service.js"></script>
+    <script src="scripts/services/http-interceptor.js"></script>
+    <script src="scripts/services/transform-request-as-form-post.js"></script>
+    <script src="scripts/services/offers-service.js"></script>
+    <script src="scripts/services/transactions-service.js"></script>
+    <script src="scripts/services/devices-service.js"></script>
+    <script src="scripts/services/business-service.js"></script>
+    <script src="scripts/services/billing-service.js"></script>
+    <script src="scripts/services/payouts-service.js"></script>
+    <script src="scripts/services/authenticate-service.js"></script>
+    <script src="scripts/services/error-service.js"></script>
+    <!-- endbuild -->
+
+</body>
+</html>

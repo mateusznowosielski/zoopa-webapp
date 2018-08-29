@@ -1,0 +1,48 @@
+<nav class="navbar navbar-default navbar-main" role="navigation" ng-controller="MainCtrl">
+  
+  <div class="navbar-brand">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       width="160px" height="26.239px" viewBox="0 0 160 26.239" enable-background="new 0 0 160 26.239" xml:space="preserve">
+    <path fill="#E46E6C" d="M0,24.493L10.845,4.913V4.767H1.748c-0.364,0-0.692-0.327-0.692-0.691V1.055
+      c0-0.365,0.328-0.691,0.692-0.691H16.96c0.364,0,0.691,0.327,0.691,0.691v0.473l-10.7,19.834v0.073h9.28
+      c0.4,0,0.692,0.327,0.692,0.691v3.021c0,0.365-0.292,0.691-0.692,0.691H0.692C0.328,25.839,0,25.513,0,25.147V24.493z"></path>
+    <path fill="#E46E6C" d="M42.698,0c7.29,0,13.121,5.867,13.121,13.156c0,7.289-5.831,13.083-13.121,13.083
+      c-7.289,0-13.083-5.795-13.083-13.083C29.614,5.867,35.409,0,42.698,0 M42.698,21.502c4.592,0,8.382-3.754,8.382-8.346
+      s-3.79-8.418-8.382-8.418c-4.592,0-8.345,3.826-8.345,8.418S38.106,21.502,42.698,21.502"></path>
+    <path fill="#E46E6C" d="M81.593,0c7.289,0,13.12,5.867,13.12,13.156c0,7.289-5.831,13.083-13.12,13.083
+      c-7.29,0-13.084-5.795-13.084-13.083C68.509,5.867,74.303,0,81.593,0 M81.593,21.502c4.592,0,8.382-3.754,8.382-8.346
+      s-3.79-8.418-8.382-8.418c-4.592,0-8.346,3.826-8.346,8.418S77,21.502,81.593,21.502"></path>
+    <path fill="#E46E6C" d="M107.404,1.055c0-0.365,0.29-0.691,0.69-0.691h8.553c4.477,0,8.152,3.639,8.152,8.042
+      c0,4.513-3.676,8.188-8.116,8.188h-4.549v8.553c0,0.365-0.328,0.691-0.691,0.691h-3.349c-0.4,0-0.69-0.326-0.69-0.691V1.055z
+       M116.356,12.155c2.038,0,3.749-1.637,3.749-3.784c0-2.002-1.711-3.53-3.749-3.53h-4.222v7.314H116.356z"></path>
+    <path fill="#E46E6C" d="M135.798,24.894L147.116,0.4c0.109-0.218,0.292-0.4,0.619-0.4h0.363c0.365,0,0.51,0.182,0.619,0.4
+      l11.21,24.494c0.218,0.474-0.073,0.945-0.619,0.945h-3.166c-0.546,0-0.801-0.218-1.056-0.728l-1.783-3.93h-10.882l-1.784,3.93
+      c-0.145,0.364-0.472,0.728-1.055,0.728h-3.166C135.871,25.839,135.58,25.367,135.798,24.894 M151.521,17.142l-3.64-8.007h-0.108
+      l-3.567,8.007H151.521z"></path>
+    </svg>
+  </div>
+
+  <div class="container-fluid">
+
+      <ul class="nav navbar-nav navbar-right">
+      	<li ng-class="{ active: state.includes('main.dashboard') }"><a ui-sref="main.dashboard">Offers</a></li>
+      	<li ng-class="{ active: state.includes('main.settings.company') }"><a ui-sref="main.settings.company.data">Company</a></li>
+      	<li ng-class="{ active: state.includes('main.settings.devices') }"><a ui-sref="main.settings.devices">Devices</a></li>
+      	<li ng-class="{ active: state.includes('main.settings.payouts') }"><a ui-sref="main.settings.payouts">Payouts</a></li>
+        <li class="dropdown" dropdown>
+            <a href class="dropdown-toggle" dropdown-toggle>{{business.name}} <span class="glyphicon glyphicon-chevron-down"></span></a>
+            <ul class="dropdown-menu">
+                <li>
+                  <a ui-sref="login">Logout</a>
+                </li>
+            </ul>
+        </li>
+        <li ng-if="business.is_trial"><a href="" title="Trial Account" data-toggle="popover" data-content="Your account is TRIAL, you are allowed to publish only one offer at a time. To upgrade and unlock all features please contact us at contact@thezoopa.com." data-trigger="click" data-placement="bottom">
+          <span class="glyphicon glyphicon-warning-sign text-warning xl trial-account-icon"></span>
+        </a></li>
+      </ul>
+  </div>
+
+</nav>
+
+<div class="container-content" ui-view="content"></div>

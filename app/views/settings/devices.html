@@ -1,0 +1,68 @@
+<div class="container container-devices">
+
+	<div class="col-md-12">
+		
+		<div ng-repeat="device in devices">
+
+			<div class="form-group form-inline" ng-show="!editedDevice || device.id != editedDevice.id">
+				<div class="form-group col-md-5 col-sm-5 col-xs-12 readonly">
+					<label>Device name</label>
+					<input type="text" class="form-control" ng-model="device.description" readonly>
+				</div>
+				<div class="form-group col-md-5 col-sm-5 col-xs-12 readonly">
+					<label>Device UUID</label>
+					<input type="text" class="form-control" ng-model="device.app_uuid" readonly>
+				</div>
+				<div class="form-group col-md-1 col-sm-1 col-xs-6 readonly" style="height: 62px;">
+					<button class="btn btn-default btn-full" ng-click="editDevice(device.id)"><span class="glyphicon glyphicon-edit"></span></button>
+				</div>
+				<div class="form-group col-md-1 col-sm-1 col-xs-6 readonly" style="height: 62px;">
+					<button class="btn btn-default btn-full" ng-click="deleteDevice(device.id)"><span class="glyphicon glyphicon-trash"></span></button>
+				</div>
+			</div>
+
+			<form ng-show="editedDevice && device.id == editedDevice.id" class="form-group form-inline" role="form" name="editedDeviceForm">
+				<div focus-input class="form-group col-md-5 col-sm-5 col-xs-12">
+					<label>Device name</label>
+					<small class="color-error" ng-show="isEditedInvalid('editedDeviceDescription', 'required')">is required</small>
+	                <small class="color-error" ng-show="isEditedInvalid('editedDeviceDescription', 'maxlength')">is max 40 characters</small>
+	                <input type="text" class="form-control" name="editedDeviceDescription" ng-maxlength="40" ng-model="editedDevice.description" required="">
+				</div>
+				<div class="form-group col-md-5 col-sm-5 col-xs-12 readonly">
+					<label>Device UUID</label>
+					<input type="text" class="form-control" ng-model="editedDevice.app_uuid" readonly>
+				</div>
+				<div class="form-group col-md-1 col-sm-1 col-xs-6 readonly" style="height: 62px;">
+					<button class="btn btn-default btn-full" ng-click="saveDevice(editedDevice.id, editedDevice)"><span class="glyphicon glyphicon-floppy-saved"></span></button>
+				</div>
+				<div class="form-group col-md-1 col-sm-1 col-xs-6 readonly" style="height: 62px;">
+					<button class="btn btn-default btn-full" ng-click="cancelEditingDevice(editedDevice.id)"><span class="glyphicon glyphicon-remove"></span></button>
+				</div>
+			</form>
+
+			<div class="horizontal-separator visible-xs-block"></div>
+			
+		</div>
+
+		<form class="form-group form-inline" role="form" name="newDeviceForm">
+
+			<div focus-input class="form-group col-md-5 col-sm-5 col-xs-12" ng-class="{'has-error': (newDeviceForm.newDeviceDescription.$error.required || newDeviceForm.newDeviceDescription.$error.maxlength)}">
+				<label>Device name</label>
+				<small class="color-error" ng-show="isNewInvalid('newDeviceDescription', 'required')">is required</small>
+	            <small class="color-error" ng-show="isNewInvalid('newDeviceDescription', 'maxlength')">is max 40 characters</small>
+                <input type="text" class="form-control" name="newDeviceDescription" ng-maxlength="40" ng-model="newDevice.description" required="">
+            </div>
+			<div focus-input class="form-group col-md-5 col-sm-5 col-xs-12" ng-class="{'has-error': (newDeviceForm.newDeviceUuid.$error.required || newDeviceForm.newDeviceUuid.$error.maxlength)}">
+				<label>Device UUID</label>
+				<small class="color-error" ng-show="isNewInvalid('newDeviceUuid', 'required')">is required</small>
+	            <small class="color-error" ng-show="isNewInvalid('newDeviceUuid', 'maxlength')">is max 40 characters</small>
+                <input type="text" class="form-control" name="newDeviceUuid" ng-maxlength="40" ng-model="newDevice.app_uuid" required="">
+            </div>
+			<div class="form-group col-md-2 col-sm-2 col-xs-12" style="height: 62px;">
+				<button type="submit" class="btn btn-default btn-full" ng-click="createDevice(newDevice)"><span class="glyphicon glyphicon-plus"></span></button>
+			</div>
+		</form>
+
+	</div>
+
+</div>

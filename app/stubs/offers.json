@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "imgUrl": "images/brazilian-dinner-photo.jpg",
+        "name": "Tiryaki Chicken Glaze",
+        "expirationDate": 1451520000000,
+        "originalPrice": 80,
+        "price": 45,
+        "status": "unpublished"
+    },
+    {
+        "id": 2,
+        "imgUrl": "images/chinese-food-photo.jpg",
+        "name": "Tiryaki Chicken Glaze with Gray Salad",
+        "expirationDate": 1451520000000,
+        "originalPrice": 80,
+        "price": 45,
+        "status": "unpublished"
+    },
+    {
+        "id": 3,
+        "imgUrl": "images/christian-bar-photo.jpg",
+        "name": "Tiryaki Chicken Glaze with Orange Salad",
+        "expirationDate": 1451520000000,
+        "originalPrice": 80,
+        "price": 45,
+        "status": "unpublished"
+    },
+    {
+        "id": 4,
+        "imgUrl": "images/fishermen-photo.jpg",
+        "name": "Tiryaki Chicken Glaze with Blue Salad",
+        "expirationDate": 1451520000000,
+        "originalPrice": 80,
+        "price": 45,
+        "status": "unpublished"
+    },
+    {
+        "id": 5,
+        "imgUrl": "images/jamba-juice-photo.jpg",
+        "name": "Tiryaki Chicken Glaze with Red Salad",
+        "expirationDate": 1451520000000,
+        "originalPrice": 80,
+        "price": 45,
+        "status": "published"
+    },
+    {
+        "id": 6,
+        "imgUrl": "images/japanese-food-photo.jpg",
+        "name": "Tiryaki Chicken Glaze with Green Salad",
+        "expirationDate": 1451520000000,
+        "originalPrice": 80,
+        "price": 45,
+        "status": "published"
+    }
+]

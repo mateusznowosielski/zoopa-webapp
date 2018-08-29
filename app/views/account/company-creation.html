@@ -1,0 +1,94 @@
+
+<div class="row create-company-page">
+    
+    <div class="col-md-6 col-md-offset-3 box">
+    	
+    	<h1>Company Details</h1>
+
+    	<p>Thank you. You have confirmed the account for <b>{{username}}</b><br />We need few more details about your company to complete the registration.</p>
+
+		<form role="form">
+
+	        <div class="form-group ">
+	            <label>Company name</label>
+	            <input type="text" class="form-control" ng-model="business.name" >
+	        </div>
+	        <div class="form-group ">
+	            <label>Address 1</label>
+	            <input type="text" class="form-control" ng-model="business.address1" >
+	        </div>
+	        <div class="form-group form-inline">
+	            <div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+	                <label>Address 2</label>
+	                <input type="text" class="form-control" ng-model="business.address2" >
+	            </div>
+	            <div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+	                <label>Address 3</label>
+	                <input type="text" class="form-control" ng-model="business.address3" >
+	            </div>
+	        </div>
+	        <div class="form-group form-inline">
+	            <div class="form-group col-md-6 col-sm-6 col-xs-12 ">
+	                <label>City</label>
+	                <input type="text" class="form-control" ng-model="business.city" >
+	            </div>
+	            <div class="form-group col-md-3 col-sm-3 col-xs-6 ">
+	                <label>State</label>
+	                <input type="text" class="form-control" ng-model="business.state" >
+	            </div>
+	            <div class="form-group col-md-3 col-sm-3 col-xs-6 ">
+	                <label>Zip code</label>
+	                <input type="text" class="form-control" ng-model="business.zip" >
+	            </div>
+	        </div>
+	        <div class="form-group ">
+	            <label>Country</label>
+	            <input type="text" class="form-control" ng-model="business.country" >
+	        </div>
+	        <div class="form-group" ng-class="{'has-error': (businessForm.phoneNumber.$error.required || companyForm.phoneNumber.$error.maxlength)}">
+	            <label>Phone number</label>
+	            <small class="color-error" ng-show="businessForm.phoneNumber.$error.required">is required</small>
+	            <small class="color-error" ng-show="businessForm.phoneNumber.$error.maxlength">is max 20 characters</small>
+	            <input type="text" class="form-control" ng-model="business.phone" name="phoneNumber" ng-blur="phoneNumberBlurred = true" ng-maxlength="20" ng-required="businessSubmitted || phoneNumberBlurred">
+	        </div>
+	        <div class="form-group" ng-class="{'has-error': (businessForm.website.$error.required || companyForm.website.$error.maxlength)}">
+	            <label>Website</label>
+	            <small class="color-error" ng-show="businessForm.website.$error.required">is required</small>
+	            <small class="color-error" ng-show="businessForm.website.$error.maxlength">is max 100 characters</small>
+	            <input type="text" class="form-control" ng-model="business.website" name="website" ng-blur="websiteBlurred = true" ng-maxlength="100" ng-required="businessSubmitted || websiteBlurred">
+	        </div>
+	        <div class="form-group form-inline">
+	            <div class="form-group col-md-6 col-sm-6 col-xs-6">
+	                <label>Longitude</label>
+	                <input type="text" class="form-control" ng-model="business.latitude">
+	            </div>
+	            <div class="form-group col-md-6 col-sm-6 col-xs-6">
+	                <label>Latitude</label>
+	                <input type="text" class="form-control" ng-model="business.longitude">
+	            </div>
+	        </div>
+			<div class="form-group form-inline">
+	            <div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+	                <label>Bank Account number</label>
+	                <input type="text" class="form-control" ng-model="business.accountNumber" >
+	            </div>
+	            <div class="form-group col-md-6 col-sm-6 col-xs-6 ">
+	                <label>Bank Routing number</label>
+	                <input type="text" class="form-control" ng-model="business.routingNumber" >
+	            </div>
+	        </div>
+
+			<div ng-if="creating || error">
+			  	<p ng-if="creating">Registering...</p>
+			  	<p ng-if="error" class="text-danger">Error: {{errorDescription}}</p>
+			</div>
+
+			<div style="margin-top: 20px;">
+				<a type="submit" class="btn btn-success" ng-click="createCompany(business)">Register</a>
+				<a class="btn btn-default pull-right" ng-click="goToLogin()">Go to Login</a>
+			</div>
+		  	<!-- <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="login-spinner"></span> -->
+		</form>
+    </div>
+
+</div>

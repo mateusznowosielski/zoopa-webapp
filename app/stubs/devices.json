@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "description": "Boss iPhone",
+        "appUuid": "53453-3463-363463-3646346-34634636"
+    },
+    {
+        "id": 2,
+        "description": "Alberts iPhone",
+        "appUuid": "53453-3463-363463-3646346-34634636"
+    },
+    {
+        "id": 3,
+        "description": "Tims iPhone",
+        "appUuid": "53453-3463-363463-3646346-34634636"
+    },
+    {
+        "id": 4,
+        "description": "Jenny iPhone",
+        "appUuid": "53453-3463-363463-3646346-34634636"
+    },
+    {
+        "id": 5,
+        "description": "Tiffany iPhone",
+        "appUuid": "53453-3463-363463-3646346-34634636"
+    }
+]

@@ -1,0 +1,40 @@
+    
+<div class="container-fluid container-payouts">
+
+  <div class="col-md-3 payouts-container">
+    <div class="row">
+      <ul class="list-unstyled">
+        <li ng-class="{'active': payout === selectedPayout}" ng-repeat="payout in payouts" ng-click="getPayoutLines(payout)">
+          <p class="pull-left">
+            <span class="payout-id">{{payout.payout_id}}</span>
+            <span class="payout-status" ng-class="{'status-unpaid': payout.status === 'unpaid', 'status-paid': payout.status === 'paid', 'status-current': payout.status === 'current'}">{{payout.status.toUpperCase()}}</span>
+          </p>
+          <p class="pull-right">{{moment(payout.begin_at * 1000).format('DD MMM YYYY') + ' - ' + moment(payout.end_at * 1000).format('DD MMM YYYY')}}</p>
+          <div class="clearfix"></div>
+          <p class="pull-left">
+            <span class="xl">{{payout.transactions_count}}</span> <span class="s"><ng-pluralize count="payout.transactions_count" when="{'1': 'transaction', 'other': 'transactions'}"></span>
+          </p>
+          <p class="pull-right">
+            <span class="s">total:</span> <span class="xl">${{payout.total_final_amount}}</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="col-md-9 payouts-line-container">
+    <div class="grid-container">
+      <div class="grid-background"></div>
+      <div ui-grid="gridPayoutsLinesOptions" class="grid"></div>
+    <div>
+    <div class="payout-summary">
+      <ul class="list-unstyled">
+        <li class="pull-right amount s">total final amount: <span class="xxl">${{selectedPayout.total_final_amount}}</span></li>
+        <li class="pull-right amount s">fee: <span class="xl">${{selectedPayout.total_fee_amount}} ({{selectedPayout.fee_percent}}%)</span></li>
+        <li class="pull-right amount s">total amount: <span class="xl">${{selectedPayout.total_amount}}</span></li>
+        <li class="pull-left ids s">transfer id: <span class="xl">{{selectedPayout.money_transfer_id}}</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>

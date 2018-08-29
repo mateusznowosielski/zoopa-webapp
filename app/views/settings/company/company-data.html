@@ -1,0 +1,103 @@
+<div class="container container-company">  
+    <div class="col-md-offset-2 col-md-8 form-container">
+        
+        <form name="businessForm" novalidate>
+
+            <!-- <header class="clearfix">
+                <a class="btn btn-icon pull-right" ng-click="saveBusiness()">Save all <span class="glyphicon glyphicon-floppy-saved"></span></a>
+            </header> -->
+
+            <div focus-input class="form-group">
+                <label>Company name</label>
+                <small class="color-error" ng-show="isInvalid('name', 'required')">is required</small>
+                <small class="color-error" ng-show="isInvalid('name', 'maxlength')">is max 50 characters</small>
+                <input type="text" class="form-control" ng-model="businessEdited.name" name="name" ng-maxlength="50" required="">
+            </div>
+            <div focus-input class="form-group">
+                <label>Phone number</label>
+                <small class="color-error" ng-show="isInvalid('phone', 'required')">is required</small>
+                <small class="color-error" ng-show="isInvalid('phone', 'maxlength')">is max 20 characters</small>
+                <input type="text" class="form-control" ng-model="businessEdited.phone" name="phone" ng-maxlength="20" required="">
+            </div>
+            <div focus-input class="form-group">
+                <label>Website</label>
+                <small class="color-error" ng-show="isInvalid('website', 'required')">is required</small>
+                <small class="color-error" ng-show="isInvalid('website', 'maxlength')">is max 100 characters</small>
+                <input type="text" class="form-control" ng-model="businessEdited.website" name="website" ng-maxlength="100" required="">
+            </div>
+
+            <div focus-input class="form-group">
+                <label>Address 1</label>
+                <small class="color-error" ng-show="isInvalid('address1', 'required')">is required</small>
+                <small class="color-error" ng-show="isInvalid('address1', 'maxlength')">is max 60 characters</small>
+                <input type="text" class="form-control" ng-model="businessEdited.address1" name="address1" ng-maxlength="60" required="">
+            </div>
+            <div focus-input class="form-group">
+                <label>Address 2</label>
+                <small class="color-error" ng-show="isInvalid('address2', 'maxlength')">is max 60 characters</small>
+                <input type="text" class="form-control" ng-model="businessEdited.address2" name="address2" ng-maxlength="60">
+            </div>
+            <div focus-input class="form-group">
+                <label>City</label>
+                <small class="color-error" ng-show="isInvalid('city', 'required')">is required</small>
+                <small class="color-error" ng-show="isInvalid('city', 'maxlength')">is max 20 characters</small>
+                <input type="text" class="form-control" ng-model="businessEdited.city" name="city" ng-maxlength="20" required="">
+            </div>
+            <div class="form-group form-inline">
+                <div focus-input class="form-group col-md-6 col-sm-6 col-xs-6">
+                    <label>State</label>
+                    <small class="color-error" ng-show="isInvalid('state', 'required')">is required</small>
+                    <small class="color-error" ng-show="isInvalid('state', 'maxlength')">is max 20 characters</small>
+                    <input type="text" class="form-control" ng-model="businessEdited.state" name="state" ng-maxlength="20" required="">
+                </div>
+                <div focus-input class="form-group col-md-6 col-sm-6 col-xs-6">
+                    <label>Zip code</label>
+                    <small class="color-error" ng-show="isInvalid('zip', 'required')">is required</small>
+                    <small class="color-error" ng-show="isInvalid('zip', 'maxlength')">is max 10 characters</small>
+                    <input type="text" class="form-control" ng-model="businessEdited.zip" name="zip" ng-maxlength="10" required="">
+                </div>
+            </div>
+            <div focus-input class="form-group">
+                <label>Country</label>
+                <small class="color-error" ng-show="isInvalid('country', 'required')">is required</small>
+                <small class="color-error" ng-show="isInvalid('country', 'maxlength')">is max 20 characters</small>
+                <input type="text" class="form-control" ng-model="businessEdited.country" name="country" ng-maxlength="20" required="">
+            </div>
+            <div focus-input class="form-group">
+                <label>Tax percent</label>
+                <small class="color-error" ng-show="isInvalid('tax_percent', 'required')">is required</small>
+                <small class="color-error" ng-show="isInvalid('tax_percent', 'maxlength')">is max 5 characters</small>
+                <small class="color-error" ng-show="isInvalid('tax_percent', 'ngMin')">must be positive</small>
+                <small class="color-error" ng-show="isInvalid('tax_percent', 'ngMax')">can't be greater than 60</small>
+                <input type="number" class="form-control" ng-model="businessEdited.tax_percent" name="tax_percent" ng-maxlength="5" required="" ng-min="'0'" ng-max="'60'">
+            </div>
+            <div class="form-group form-inline">
+                <div class="form-group col-md-6 col-sm-6 col-xs-6 readonly">
+                    <label>Longitude (autofill from address)</label>
+                    <input type="text" class="form-control" name="latitude" ng-model="businessEdited.latitude" readonly>
+                </div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-6 readonly">
+                    <label>Latitude (autofill from address)</label>
+                    <input type="text" class="form-control" name="longitude" ng-model="businessEdited.longitude" readonly>
+                </div>
+            </div>
+            <div class="form-group form-inline">
+                <!-- <div class="form-group col-md-6 col-sm-6 col-xs-12 readonly" style="height: 62px;">
+                    <button type="button" class="btn btn-default btn-full" ng-click="geocodeLocation()">Geocode</button>
+                </div> -->
+                <div class="form-group col-md-6 col-sm-6 col-xs-12 readonly" style="height: 62px;">
+                    <button type="button" class="btn btn-default btn-full" ng-click="restoreBusiness()">Restore</button>
+                </div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12 readonly" style="height: 62px;">
+                    <button type="submit" class="btn btn-default btn-full" ng-click="saveBusiness()">Save</button>
+                </div>
+            </div>
+            
+
+        </form> 
+
+    </div>
+
+    
+
+</div>

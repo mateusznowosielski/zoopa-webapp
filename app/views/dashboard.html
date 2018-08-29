@@ -1,0 +1,194 @@
+<div class="offers-container">
+
+    <div class="offers-row">
+
+
+
+    	<!-- <div class="row"> -->
+        	<!-- <div class="col-md-5 col-sm-5 col-xs-5 offers-section"> -->
+            
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 offers-section">
+
+                <header class="clearfix">
+                    <h4 class="pull-left">Offers Unpublished</h4>
+                    <a class="btn btn-transparent pull-right" ng-click="addOffer()" style="margin-top: 5px;"><span class="hidden-xs">Create offer</span> <span class="glyphicon glyphicon-plus"></span></a>
+                </header>
+
+                <div class="offers-list">
+
+                <!-- <h3 ng-if="!unpublishedOffersExist" class="no-offers-label">No offers created</h3> -->
+                <!-- <a style="width: 100px height: 20px; background-color: #444;" class="glyphicon glyphicon-plus"></a> -->
+
+        		<!-- <ul class="list-group" ng-if="unpublishedOffersExist"> -->
+                <ul class="list-group">
+                    <!-- <li>
+                        <a class="btn btn-add-offer glyphicon glyphicon-plus" ng-click="addOffer()"></a>
+                    </li> -->
+                    <li class="list-group-item new-offer-item" ng-if="selectedOffer && selectedOffer.id == undefined && editing == true">
+                        <h1>New Offer</h1>
+                    </li>
+        			<li class="list-group-item" ng-class="{'active': offer.id === selectedOffer.id, 'expired': isOfferExpired(offer)}" ng-repeat="offer in offers | filter:isOfferUnpublished:true" ng-click="selectOffer(offer)">
+
+        				<div class="row row-relative">
+                            <div class="col-lg-5 col-md-5 col-sm-4 col-xs-3 offer-image">
+                                <img ng-src="{{offer.image_url}}"/>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-8 col-xs-9 offer-details">
+                                <div class="offer-heading">
+                                    <div class="col-md-7 col-sm-7 col-xs-7 box">
+                                        <div class="name-description" ng-bind-html="'<h4>' + offer.name + '</h4><h5>' + offer.headline + '</h5>'" ellipsis></div>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-xs-5 box">
+                                        <p class="offer-discounted-price"><sup>$</sup>{{offer.price_discounted_integer}}<sup>{{offer.price_discounted_decimal}}</sup></p>
+                                        <p class="offer-original-price muted">{{offer.price_original | currency:""}}</p>
+                                        <a class="btn btn-default btn-sm btn-publish pull-right" ng-click="publishOffer($event, offer.id)" ng-if="!editing && !isOfferExpired(offer) && (offer.status == 1 || offer.status == 3)">Publish</a>
+                                    </div>
+                                </div>
+                                <div class="offer-status">
+                                    <p class="pull-left muted">Exp. {{offer.expiration_date_string}} ({{offer.quantity_used}}/{{offer.quantity}})</p>
+                                    <p class="pull-right muted" ng-class="{'text-expired': isOfferExpired(offer)}">{{getOfferStatus(offer)}}</p>
+                                </div>
+                            </div>
+                        </div>
+        			</li>
+        		</ul>
+
+                </div>
+
+        	</div>
+
+        	<!-- <div ng-class="{'col-md-2 col-sm-2 col-xs-2':!editing, 'col-md-1 col-sm-1 col-xs-1':editing}"></div> -->
+
+        	<!-- <div ng-class="{'col-md-5 col-sm-5 col-xs-5':!editing, 'col-md-6 col-sm-6 col-xs-6':editing}" class="offers-section"> -->
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 offers-section" ng-class="{'offer-section-editing':editing, 'offers-section-published':!editing}" >
+                
+                <header class="clearfix" ng-if="!editing">
+                    <h4 class="pull-left">Offers Published</h4>
+                </header>
+
+                <header class="clearfix" ng-if="editing">
+                    <a class="btn btn-icon glyphicon glyphicon-remove" ng-click="cancelEditingOffer()"></a>
+                    <a class="btn btn-icon glyphicon glyphicon-floppy-saved pull-right" ng-click="saveOffer(selectedOffer.id)"
+                       ng-disabled="isOfferReadOnly(selectedOffer.status)"></a>
+                    <a class="btn btn-icon glyphicon glyphicon-trash pull-right" ng-click="deleteOffer(selectedOffer.id)"
+                       ng-disabled="isOfferReadOnly(selectedOffer.status)"></a>
+                </header>
+
+                <div class="offers-list" >
+
+                    <!-- <h3 ng-if="!editing && !publishedOffersExist" class="no-offers-label">No offers published</h3> -->
+
+                    <!-- <ul ng-if="!editing && publishedOffersExist" class="list-group"> -->
+                    <ul ng-if="!editing" class="list-group">
+                        <li class="list-group-item" ng-class="{'expired': isOfferExpired(offer)}" ng-repeat="offer in offers | filter:isOfferPublished:true">
+                            <div class="row row-relative">
+                                <div class="col-lg-5 col-md-5 col-sm-4 col-xs-3 offer-image">
+                                    <img ng-src="{{offer.image_url}}"/>
+                                </div>
+                                <div class="col-lg-7 col-md-7 col-sm-8 col-xs-9 offer-details">
+                                    <div class="offer-heading">
+                                        <div class="col-md-7 col-sm-7 col-xs-7 box">
+                                            <div class="name-description" ng-bind-html="'<h4>' + offer.name + '</h4><h5>' + offer.headline + '</h5>'" ellipsis></div>
+                                        </div>
+                                        <div class="col-md-5 col-sm-5 col-xs-5 box">
+                                            <p class="offer-discounted-price"><sup>$</sup>{{offer.price_discounted_integer}}<sup>{{offer.price_discounted_decimal}}</sup></p>
+                                            <p class="offer-original-price muted">{{offer.price_original | currency:""}}</p>
+                                            <a class="btn btn-default btn-sm btn-publish pull-right" ng-click="unpublishOffer($event, offer.id)">Unpublish</a>
+                                        </div>
+                                    </div>
+                                    <div class="offer-status">
+                                        <p class="pull-left muted">Exp. {{offer.expiration_date_string}} ({{offer.quantity_used}}/{{offer.quantity}})</p>
+                                        <p class="pull-right muted" ng-class="{'text-expired': isOfferExpired(offer)}">{{getOfferStatus(offer)}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div ng-if="editing" class="offer-editing-container">
+
+                        <form role="form" name="offerForm">
+
+                            <div ng-show="uploader.isHTML5" class="offer-image-container">
+                                <div nv-file-over="" nv-file-drop="" uploader="uploader" over-class="another-file-over-class" class="offer-drop-zone" ng-class="{imageInvalid: !validImageOffer()}">
+                                    <div class="btn-add-photo glyphicon glyphicon-picture"></div>
+                                    <div class="offer-photo-container" ng-if="selectedOffer.image_url">
+                                        <img ng-src="{{selectedOffer.image_url}}"/>
+                                    </div>
+                                    <div ng-repeat="item in uploader.queue" class="offer-photo-container">
+                                        <img ng-show="uploader.isHTML5" ng-thumb="item._file" image-ready="imageReady(imageData)" image-data="{{selectedOffer.image_data}}"/>
+                                    </div>
+                                    <input type="file" nv-file-select="" uploader="uploader" ng-blur="imageBlurred = true" ng-readonly="isOfferReadOnly(selectedOffer.status)"/>
+                                </div>
+                                <small class="color-error" ng-if="!validImageOffer()">Offer Image is required.</small>
+                            </div>
+
+                            <div focus-input class="form-group" ng-class="{'has-error': (offerForm.offerName.$error.required || offerForm.offerName.$error.maxlength)}">
+                                <label>Offer name</label>
+                                <small class="color-error" ng-if="offerForm.offerName.$error.required">is required</small>
+                                <small class="color-error" ng-if="offerForm.offerName.$error.maxlength">is max 40 characters</small>
+                                <input type="text" class="form-control" name="offerName" ng-model="selectedOffer.name" ng-blur="nameBlurred = true" ng-readonly="isOfferReadOnly(selectedOffer.status)" ng-required="offerSubmitted || nameBlurred" ng-maxlength="40">
+                            </div>
+                            <div focus-input class="form-group" ng-class="{'has-error': (offerForm.offerHeadline.$error.required || offerForm.offerHeadline.$error.maxlength)}">
+                                <label>Offer headline</label>
+                                <small class="color-error" ng-if="offerForm.offerHeadline.$error.required">is required</small>
+                                <small class="color-error" ng-if="offerForm.offerHeadline.$error.maxlength">is max 60 characters</small>
+                                <input type="text" class="form-control" name="offerHeadline" ng-model="selectedOffer.headline" ng-blur="headlineBlurred = true" ng-readonly="isOfferReadOnly(selectedOffer.status)" ng-required="offerSubmitted || headlineBlurred" ng-maxlength="60">
+                            </div>
+                            <div class="form-group form-inline">
+                                <div focus-input class="form-group col-md-6 col-sm-12 col-xs-12" ng-class="{'has-error': (offerForm.offerOriginalPrice.$error.required || offerForm.offerOriginalPrice.$error.number || offerForm.offerOriginalPrice.$error.maxlength)}">
+                                    <label>Original price</label>
+                                    <small class="color-error" ng-show="offerForm.offerOriginalPrice.$error.required">is required</small>
+                                    <small class="color-error" ng-show="offerForm.offerOriginalPrice.$error.maxlength">is max 8 digits</small>
+                                    <small class="color-error" ng-show="offerForm.offerOriginalPrice.$error.fcsaNumber">must be a currency</small>
+                                    <input type="text" class="form-control input-number–noSpinners" name="offerOriginalPrice" ng-blur="originalPriceBlurred = true" ng-maxlength="8" ng-model="selectedOffer.price_original" ng-readonly="isOfferReadOnly(selectedOffer.status)" ng-required="offerSubmitted || originalPriceBlurred" fcsa-number="{prepend:'$', min:0, maxDecimals:2}">
+                                </div>
+                                <div focus-input class="form-group col-md-6 col-sm-12 col-xs-12" ng-class="{'has-error': (offerForm.offerDiscountPrice.$error.required || offerForm.offerDiscountPrice.$error.number || offerForm.offerDiscountPrice.$error.maxlength)}">
+                                    <label>Discounted price</label>
+                                    <small class="color-error" ng-show="offerForm.offerDiscountPrice.$error.required">is required</small>
+                                    <small class="color-error" ng-show="offerForm.offerDiscountPrice.$error.maxlength">is max 8 digits</small>
+                                    <small class="color-error" ng-show="offerForm.offerDiscountPrice.$error.fcsaNumber">must be a currency</small>
+                                    <input type="text" class="form-control input-number–noSpinners" name="offerDiscountPrice" ng-blur="discountPriceBlurred = true" ng-maxlength="8"  ng-model="selectedOffer.price_discounted" ng-readonly="isOfferReadOnly(selectedOffer.status)" ng-required="offerSubmitted || discountPriceBlurred" fcsa-number="{prepend:'$', min:0, maxDecimals:2}">
+                                </div>
+                            </div>
+                            <div class="form-group form-inline">
+                                <div focus-input class="form-group col-md-6 col-sm-12 col-xs-12" ng-class="{'has-error': (offerForm.offerCounterOriginal.$error.required || offerForm.offerCounterOriginal.$error.number || offerForm.offerCounterOriginal.$error.maxlength)}">
+                                    <label>Offer limit</label>
+                                    <small class="color-error" ng-show="offerForm.offerCounterOriginal.$error.required">is required</small>
+                                    <small class="color-error" ng-show="offerForm.offerCounterOriginal.$error.number">must be a number</small>
+                                    <small class="color-error" ng-show="offerForm.offerCounterOriginal.$error.maxlength">is max 8 digits</small>
+                                    <small class="color-error" ng-show="offerForm.offerCounterOriginal.$error.min">must be positive</small>
+                                    <small class="color-error" ng-show="offerForm.offerCounterOriginal.$error.ngInteger && !offerForm.offerCounterOriginal.$error.maxlength">must be integer</small>
+                                    <input type="number" class="form-control input-number–noSpinners" name="offerCounterOriginal" ng-blur="counterOriginalBlurred = true" ng-maxlength="8" ng-model="selectedOffer.quantity" ng-readonly="isOfferReadOnly(selectedOffer.status)" ng-required="offerSubmitted || counterOriginalBlurred" min="0" ng-integer>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-12 col-xs-12" ng-class="{'has-error': offerForm.offerExpirationDate.$error.required}">
+                                    <p class="input-group expiration-date-picker">
+                                      <label>Expiration date </label>
+                                      <small class="color-error" ng-show="offerForm.offerExpirationDate.$error.required">is required</small>
+                                      <input type="text" class="form-control" ng-class="{readwrite: !isOfferReadOnly(selectedOffer.status)}" name="offerExpirationDate" ng-blur="expirationDateBlurred = true" datepicker-popup="dd MMM yyyy" ng-model="selectedOffer.expiration_date_string" is-open="selectedOffer.datePicker.opened" min-date="selectedOffer.datePicker.min_date" ng-click="openDatePicker($event)" show-button-bar="false" show-weeks="false" readonly ng-required="offerSubmitted || expirationDateBlurred"/>
+                                      <!-- <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default btn-open-date-picker" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span> -->
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="clearfix form-group" ng-class="{'has-error': offerForm.offerBody.$error.required || offerForm.offerBody.$error.number}">
+                                <label>Offer terms & description</label>
+                                <small class="color-error" ng-if="offerForm.offerBody.$error.required">is required</small>
+                                <small class="color-error" ng-if="offerForm.offerBody.$error.maxlength">is max 2000 characters</small>
+                                <textarea type="text" class="form-control" name="offerBody" ng-blur="bodyBlurred = true" ng-maxlength="2000" ng-model="selectedOffer.body" ng-readonly="isOfferReadOnly(selectedOffer.status)" ng-required="offerSubmitted || bodyBlurred" msd-elastic></textarea>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+        	</div>
+
+        <!-- </div> -->
+
+    </div>
+
+</div>

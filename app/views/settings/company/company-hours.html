@@ -1,0 +1,67 @@
+    
+<div class="container container-company">
+
+    <div class="col-md-offset-1 col-md-10 form-container">
+
+        <form name="hoursForm" novalidate>
+            <div class="form-group form-inline" ng-repeat="dayRow in hours">
+                <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                    <label>Week day</label>
+                    <small class="color-error" ng-show="isInvalid('weekDay' + $index, 'required')">is required</small>
+                    <!-- <input type="text" class="form-control" name="latitude" ng-model="businessEdited.a" required=""> -->
+                    <div class="dropdown" dropdown>
+                        <button type="button" name="{{'weekDay' + $index}}" class="btn btn-default btn-full btn-transparent dropdown-toggle" dropdown-toggle register-validator="hoursForm" ng-model="dayRow.day" required="">
+                            <span class="pull-left">{{dayRow.day ? weekDaysKeys[dayRow.day] : ''}}</span><span class="glyphicon glyphicon-chevron-down muted pull-right"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-repeat="weekDay in weekDays"><a ng-click="dayRow.day = weekDay.id">{{weekDay.name}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 col-sm-3 col-xs-4">
+                    <label>Open at</label>
+                    <small class="color-error" ng-show="isInvalid('openTime' + $index, 'required')">is required</small>
+                    <!-- <input type="text" class="form-control" name="latitude" ng-model="businessEdited.b" required=""> -->
+                    <div class="dropdown" dropdown>
+                        <button type="button" name="{{'openTime' + $index}}" class="btn btn-default btn-full btn-transparent dropdown-toggle"dropdown-toggle register-validator="hoursForm" ng-model="dayRow.open_time" required="">
+                            <span class="pull-left">{{dayRow.open_time ? dayRow.open_time : ''}}</span> <span class="glyphicon glyphicon-chevron-down muted pull-right"></span>
+                        </button>
+                        <ul class="dropdown-menu scrollable" role="menu">
+                            <li ng-repeat="hour in hoursList"><a ng-click="dayRow.open_time = hour">{{hour}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 col-sm-3 col-xs-4">
+                    <label>Close at</label>
+                    <small class="color-error" ng-show="isInvalid('closeTime' + $index, 'required')">is required</small>
+                    <!-- <input type="text" class="form-control" name="longitude" ng-model="businessEdited.c" required=""> -->
+                    <div class="dropdown" dropdown>
+                        <button type="button" name="{{'closeTime' + $index}}" class="btn btn-default btn-full btn-transparent dropdown-toggle" dropdown-toggle register-validator="hoursForm" ng-model="dayRow.close_time" required="">
+                            <span class="pull-left">{{dayRow.close_time ? dayRow.close_time : ''}}</span> <span class="glyphicon glyphicon-chevron-down muted pull-right"></span>
+                        </button>
+                        <ul class="dropdown-menu scrollable" role="menu">
+                            <li ng-repeat="hour in hoursList"><a ng-click="dayRow.close_time = hour">{{hour}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group col-md-1 col-sm-1 col-xs-6" style="height: 62px;">
+                    <button type="submit" class="btn btn-default btn-full" ng-click="removeDayRow(dayRow)" ng-disabled="hours.length <= 1"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+                <div class="form-group col-md-1 col-sm-1 col-xs-6" style="height: 62px;">
+                    <button type="submit" class="btn btn-default btn-full" ng-click="addDayRow(dayRow)"><span class="glyphicon glyphicon-plus"></span></button>
+                </div>
+            </div>
+            <div class="form-group form-inline">
+                <div class="form-group col-md-6 col-sm-6 col-xs-12 readonly" style="height: 62px;">
+                    <label>Open status</label>
+                    <div class="clearfix"></div>
+                    <label style="margin-top: 5px;"><input type="checkbox" ng-model="is_open"> is open right now</label>
+                </div>
+                <div class="form-group col-md-6 col-sm-6 col-xs-12 readonly" style="height: 62px;">
+                    <button type="submit" class="btn btn-default btn-full" ng-click="saveOpeningHours()">Save</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
